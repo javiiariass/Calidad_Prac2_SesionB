@@ -28,10 +28,10 @@ class EmpleadoTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		encargado = new Empleado(TipoEmpleado.Encargado);
-		encargado.setSalarioBase(2000);
+		encargado.setSalarioBase(2500);
 
 		vendedor = new Empleado(TipoEmpleado.Vendedor);
-		vendedor.setSalarioBase(2500);
+		vendedor.setSalarioBase(2000);
 
 	}
 
