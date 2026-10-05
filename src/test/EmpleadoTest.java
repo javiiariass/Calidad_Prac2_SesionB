@@ -3,7 +3,6 @@ package test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -88,10 +87,11 @@ class EmpleadoTest {
 		
 //		[2100, 2499]
 		assertEquals(1785, vendedor.calculoNominaNeta(2100));
-		assertEquals(2124.15 , vendedor.calculoNominaNeta(2499));
+//		Es necesario indicar la "precision" al usar float o double para que acepte X decimales de "error"
+		assertEquals(2124.15f , vendedor.calculoNominaNeta(2499), 0.001f);
 		
 //		>= 2500
-		assertEquals(2050, vendedor.calculoNominaNeta(2500));
+		assertEquals(2050f, vendedor.calculoNominaNeta(2500));
 		assertEquals(4100, vendedor.calculoNominaNeta(5000));
 		
 	

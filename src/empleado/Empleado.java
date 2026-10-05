@@ -63,7 +63,20 @@ public class Empleado {
 		return tipo.getSalarioBase() + calculoPrima(ventasMes) + calculoHorasExtra(horasExtra);
 	}
 
+	
+	/**
+	 * 
+	 * @param nominaBruta Nómina bruta del empleado
+	 * @return nomina neta calculada en función a la nomina bruta y las retenciones.
+	 */
 	public float calculoNominaNeta(float nominaBruta) {
-
+		float retencion = 0;
+		
+		if (nominaBruta >= 2500)
+			retencion = 0.18f;
+		else if(nominaBruta >= 2100)
+			retencion = 0.15f;
+		
+		return nominaBruta * (1-retencion);
 	}
 }
