@@ -3,7 +3,6 @@ package test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,10 +15,6 @@ class EmpleadoTest {
 	Empleado vendedor;
 	Empleado encargado;
 
-	@BeforeAll
-	static void setUpBeforeClass() throws Exception {
-
-	}
 
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
@@ -27,28 +22,12 @@ class EmpleadoTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		encargado = new Empleado(TipoEmpleado.Encargado);
-		encargado.setSalarioBase(2500);
-
-		vendedor = new Empleado(TipoEmpleado.Vendedor);
-		vendedor.setSalarioBase(2000);
+		encargado = new Empleado();
+		vendedor = new Empleado();
 
 	}
 
-//	@AfterEach
-//	void tearDown() throws Exception {
-//	}
-
-//	@Test
-//	void test() {
-//		fail("Not yet implemented");
-//	}
-
-	@Test
-	void salarioBaseTest() {
-		assertEquals(2000, vendedor.getSalarioBase());
-		assertEquals(2500, encargado.getSalarioBase());
-	}
+	
 
 	@Test
 	void calculoNominaBrutaPrimasTest() {
@@ -79,6 +58,7 @@ class EmpleadoTest {
 
 	}
 
+	@Test
 	void calculoNominaBrutaHorasExtrasTest() {
 
 //		10 horas extras
@@ -91,15 +71,16 @@ class EmpleadoTest {
 
 	}
 
+	@Test
 	void calculoNominaBrutaTest() {
 //		Prueba de horas extra y primas a la vez
 		assertEquals(2400, vendedor.calculoNominaBruta(TipoEmpleado.Vendedor, 1000, 10));
 		assertEquals(3100, encargado.calculoNominaBruta(TipoEmpleado.Encargado, 999, 20));
-		
+
 //		valores negativos
 		assertEquals(2000, vendedor.calculoNominaBruta(TipoEmpleado.Vendedor, -10, -120));
 		assertEquals(2500, encargado.calculoNominaBruta(TipoEmpleado.Encargado, -30, -50));
-		
+
 	}
 
 }

@@ -2,42 +2,65 @@ package empleado;
 
 public class Empleado {
 
-	float salarioBase;
+	/// Precio de las horas extra
+	private static final float PRECIO_HORAS_EXTRA = 30;
 
-	public float getSalarioBase() {
-		return salarioBase;
-	}
-
-	public void setSalarioBase(float salarioBase) {
-		this.salarioBase = salarioBase;
-	}
-
+	/**
+	 * Enum para los tipos de empleados posibles Cada empleado tiene su salario base
+	 * asociado
+	 */
 	public enum TipoEmpleado {
-		Vendedor, Encargado
+
+		Vendedor(2000), Encargado(2500);
+
+		private final float salarioBase;
+
+		TipoEmpleado(float salario) {
+			this.salarioBase = salario;
+		}
+
+		public float getSalarioBase() {
+			return salarioBase;
+		}
 	}
 
-	public Empleado() {
-		salarioBase = 2000;
-	}
+	/**
+	 * 
+	 * @param ventasMes número de ventas hechas en el mes
+	 * @return valor de la prima en función a las ventas del mes
+	 */
+	private float calculoPrima(float ventasMes) {
+		float prima = 0;
 
-	public Empleado(TipoEmpleado tipo) {
-		salarioBase = (tipo == TipoEmpleado.Vendedor ? 2000 : 2500);
-	}
-
-	public float calculoNominaBruta(TipoEmpleado tipo, float ventasMes, float horasExtra) {
-		float prima = 0; 
-		float horas = 0;
-
-		if (ventasMes > 1499 )
+		if (ventasMes > 1499)
 			prima = 200;
+
 		else if (ventasMes > 999)
 			prima = 100;
 
-		if(horasExtra > 0)
-			horas = 30 * horasExtra;
-		
-		return salarioBase + prima + horas;
-		
+		return prima;
+	}
+
+	/**
+	 * 
+	 * @param horasExtra Numero de horas extras hechas
+	 * @return - 0 si horasExtra tiene valor negativo - costo de las horas extra
+	 *         trabajadas al precio de cada una
+	 */
+	private float calculoHorasExtra(float horasExtra) {
+		return horasExtra > 0 ? horasExtra * PRECIO_HORAS_EXTRA : 0;
+	}
+
+	/**
+	 * 
+	 * @param tipo       tipo de empleado
+	 * @param ventasMes  número de ventas del mes
+	 * @param horasExtra horas extras trabajadas por el empleado
+	 * @return nomina bruta del empleado considerando salario base, ventas del mes y
+	 *         sus horas extras trabajadas
+	 */
+	public float calculoNominaBruta(TipoEmpleado tipo, float ventasMes, float horasExtra) {
+		return tipo.getSalarioBase() + calculoPrima(ventasMes) + calculoHorasExtra(horasExtra);
 	}
 
 	public float calculoNominaNeta(float nominaBruta) {
