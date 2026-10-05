@@ -15,7 +15,6 @@ class EmpleadoTest {
 	Empleado vendedor;
 	Empleado encargado;
 
-
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
 	}
@@ -26,8 +25,6 @@ class EmpleadoTest {
 		vendedor = new Empleado();
 
 	}
-
-	
 
 	@Test
 	void calculoNominaBrutaPrimasTest() {
@@ -81,6 +78,23 @@ class EmpleadoTest {
 		assertEquals(2000, vendedor.calculoNominaBruta(TipoEmpleado.Vendedor, -10, -120));
 		assertEquals(2500, encargado.calculoNominaBruta(TipoEmpleado.Encargado, -30, -50));
 
+	}
+
+	@Test
+	void calculoNominaNetaTest() {
+//		limite inferior
+		assertEquals(-1000, vendedor.calculoNominaNeta(-1000));
+		assertEquals(2000, vendedor.calculoNominaNeta(2000));
+		
+//		[2100, 2499]
+		assertEquals(1785, vendedor.calculoNominaNeta(2100));
+		assertEquals(2124.15 , vendedor.calculoNominaNeta(2499));
+		
+//		>= 2500
+		assertEquals(2050, vendedor.calculoNominaNeta(2500));
+		assertEquals(4100, vendedor.calculoNominaNeta(5000));
+		
+	
 	}
 
 }
